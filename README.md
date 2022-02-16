@@ -1,12 +1,16 @@
 Implementation of SM-2 in DART. 
 
+Credit to author(s) of https://pub.dev/packages/sm2
+
+Forked from and added null safety as pending PR hadn't been merged
+
 SM-2 is a simple spaced repetition algorithm. It calculates the number of days to wait before reviewing a piece of information based on how easily the information was remembered today.
 
 # Links
 
 * [Spaced repetition on Wikipedia](https://en.wikipedia.org/wiki/Spaced_repetition)
-* [Official algorithm description](http://www.supermemo.com/english/ol/sm2.htm)
-* [Official implementation of SM-2 algorithm in SuperMemo 2](http://www.supermemo.com/english/ol/sm2source.htm)
+* [Official algorithm description](https://www.supermemo.com/english/ol/sm2.htm)
+* [Official implementation of SM-2 algorithm in SuperMemo 2](https://www.supermemo.com/english/ol/sm2source.htm)
 * http://www.supermemo.com
 * http://www.supermemo.eu
 

@@ -1,5 +1,6 @@
-import 'package:sm2/SmResponse.dart';
+import './SmResponse.dart';
 
+/// Class providing calc function
 class Sm {
   SmResponse calc({
     required int quality,

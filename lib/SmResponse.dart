@@ -1,3 +1,4 @@
+/// Response type from calc
 class SmResponse {
   final int interval;
   final int repetitions;
