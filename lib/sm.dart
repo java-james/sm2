@@ -10,6 +10,11 @@ class Sm {
   }) {
     int interval;
     double easeFactor;
+    
+    // Always calculate ease factor using SM-2 formula, regardless of quality
+    easeFactor = previousEaseFactor +
+        (0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02));
+    
     if (quality >= 3) {
       switch (repetitions) {
         case 0:
@@ -23,12 +28,9 @@ class Sm {
       }
 
       repetitions++;
-      easeFactor = previousEaseFactor +
-          (0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02));
     } else {
       repetitions = 0;
       interval = 1;
-      easeFactor = previousEaseFactor;
     }
 
     if (easeFactor < 1.3) {
