@@ -23,7 +23,8 @@ class Sm {
       }
 
       repetitions++;
-      easeFactor = previousEaseFactor +
+      easeFactor =
+          previousEaseFactor +
           (0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02));
     } else {
       repetitions = 0;
@@ -36,6 +37,9 @@ class Sm {
     }
 
     return SmResponse(
-        interval: interval, repetitions: repetitions, easeFactor: easeFactor);
+      interval: interval,
+      repetitions: repetitions,
+      easeFactor: easeFactor,
+    );
   }
 }
