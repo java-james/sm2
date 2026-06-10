@@ -1,4 +1,4 @@
 library spaced_repetition;
 
-export 'sm.dart';
-export 'sm_response.dart';
+export 'sm2.dart';
+export 'sm2_response.dart';

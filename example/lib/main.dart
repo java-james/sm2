@@ -36,7 +36,7 @@ class _ExampleHomeState extends State<ExampleHome> {
   int? _lastQuality;
 
   void _review(int quality) {
-    final response = Sm().calc(
+    final response = Sm2().calc(
       quality: quality,
       repetitions: _repetitions,
       previousInterval: _interval,

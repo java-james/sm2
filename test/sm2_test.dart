@@ -3,9 +3,9 @@ import 'package:test/test.dart';
 
 void main() {
   test('Calc success', () {
-    final sm = Sm();
+    final sm = Sm2();
 
-    SmResponse smResponse = sm.calc(
+    Sm2Response smResponse = sm.calc(
         quality: 0,
         repetitions: 0,
         previousInterval: 0,
@@ -17,9 +17,9 @@ void main() {
   });
 
   test('Calc - quality: 5, repetitions: 2, interval: 6, factor: 1.3', () {
-    final sm = Sm();
+    final sm = Sm2();
 
-    SmResponse smResponse = sm.calc(
+    Sm2Response smResponse = sm.calc(
         quality: 5,
         repetitions: 2,
         previousInterval: 6,

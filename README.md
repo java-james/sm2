@@ -12,7 +12,7 @@ SM-2 is a simple spaced repetition algorithm. It calculates the number of days t
 import 'package:spaced_repetition/spaced_repetition.dart';
 
 void main() {
-  final response = Sm().calc(
+  final response = Sm2().calc(
     quality: 5,
     repetitions: 2,
     previousInterval: 6,

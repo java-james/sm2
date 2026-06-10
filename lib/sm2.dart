@@ -1,8 +1,8 @@
-import 'sm_response.dart';
+import 'sm2_response.dart';
 
-/// Class providing calc function
-class Sm {
-  SmResponse calc({
+/// Class providing calc function for the SM-2 algorithm.
+class Sm2 {
+  Sm2Response calc({
     required int quality,
     required int repetitions,
     required int previousInterval,
@@ -35,7 +35,10 @@ class Sm {
       easeFactor = 1.3;
     }
 
-    return SmResponse(
-        interval: interval, repetitions: repetitions, easeFactor: easeFactor);
+    return Sm2Response(
+      interval: interval,
+      repetitions: repetitions,
+      easeFactor: easeFactor,
+    );
   }
 }
