@@ -1,10 +1,29 @@
-Implementation of SM-2 in DART. 
+Implementation of SM-2 in Dart.
 
 Credit to author(s) of https://pub.dev/packages/sm2
 
 Forked from and added null safety as pending PR hadn't been merged
 
 SM-2 is a simple spaced repetition algorithm. It calculates the number of days to wait before reviewing a piece of information based on how easily the information was remembered today.
+
+# Usage
+
+```dart
+import 'package:spaced_repetition/spaced_repetition.dart';
+
+void main() {
+  final response = Sm().calc(
+    quality: 5,
+    repetitions: 2,
+    previousInterval: 6,
+    previousEaseFactor: 1.3,
+  );
+
+  print(response.interval);
+  print(response.repetitions);
+  print(response.easeFactor);
+}
+```
 
 # Links
 
@@ -76,7 +95,7 @@ If `quality` is greater than or equal to 3, indicating a correct response:
 1. If `repetitions` is 0 (first review), set `interval` to 1 day.
 2. If `repetitions` is 1 (second review), set `interval` to 6 days.
 3. If `repetitions` is greater than 1 (subsequent reviews), set `interval` to `previous interval * previous ease factor`. (See note about recursion below.)
-4. Round `interval` up to the next whole number.
+4. Round `interval` to the nearest whole number.
 5. Increment `repetitions` by 1.
 6. Set `ease factor` to `previous ease factor + (0.1 - (5 - quality) * (0.08 + (5 - quality ) * 0.02))`. (See formula description below.) 
 

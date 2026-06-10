@@ -1,4 +1,4 @@
-import './SmResponse.dart';
+import 'sm_response.dart';
 
 /// Class providing calc function
 class Sm {

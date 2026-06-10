@@ -1,48 +1,136 @@
 import 'package:flutter/material.dart';
-import 'package:sm2/main.dart';
+import 'package:spaced_repetition/spaced_repetition.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  runApp(const SpacedRepetitionExample());
+}
 
-class MyApp extends StatelessWidget {
+class SpacedRepetitionExample extends StatelessWidget {
+  const SpacedRepetitionExample({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Spaced Repetition',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
       ),
-      home: HomePage(),
+      home: const ExampleHome(),
     );
   }
 }
-class HomePage extends StatelessWidget {
 
-  final sm = Sm();
-  
+class ExampleHome extends StatefulWidget {
+  const ExampleHome({super.key});
+
   @override
+  State<ExampleHome> createState() => _ExampleHomeState();
+}
+
+class _ExampleHomeState extends State<ExampleHome> {
+  static const _initialEaseFactor = 2.5;
+
+  int _interval = 0;
+  int _repetitions = 0;
+  double _easeFactor = _initialEaseFactor;
+  int? _lastQuality;
+
+  void _review(int quality) {
+    final response = Sm().calc(
+      quality: quality,
+      repetitions: _repetitions,
+      previousInterval: _interval,
+      previousEaseFactor: _easeFactor,
+    );
+
+    setState(() {
+      _interval = response.interval;
+      _repetitions = response.repetitions;
+      _easeFactor = response.easeFactor;
+      _lastQuality = quality;
+    });
+  }
+
+  void _reset() {
+    setState(() {
+      _interval = 0;
+      _repetitions = 0;
+      _easeFactor = _initialEaseFactor;
+      _lastQuality = null;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    SmResponse smResponse = sm.calc(
-      quality: 0,
-      repetitions: 0,
-      previousInterval: 0,
-      previousEaseFactor: 2.5
-    );
+    final theme = Theme.of(context);
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Spaced Repetition'),
-        centerTitle: true,
+        title: const Text('Spaced Repetition'),
+        actions: [
+          IconButton(
+            onPressed: _reset,
+            tooltip: 'Reset',
+            icon: const Icon(Icons.refresh),
+          ),
+        ],
       ),
-      body: Container(
-        padding: const EdgeInsets.all(10.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text("Repetitions: ${smResponse.repetitions}"),
-            Text("Interval: ${smResponse.interval}"),
-            Text("Ease Factor: ${smResponse.easeFactor}")
+      body: SafeArea(
+        child: ListView(
+          padding: const EdgeInsets.all(24),
+          children: [
+            Text('Review result', style: theme.textTheme.headlineSmall),
+            const SizedBox(height: 16),
+            _ResultRow(label: 'Next interval', value: '$_interval days'),
+            _ResultRow(label: 'Repetitions', value: '$_repetitions'),
+            _ResultRow(
+              label: 'Ease factor',
+              value: _easeFactor.toStringAsFixed(2),
+            ),
+            _ResultRow(
+              label: 'Last quality',
+              value: _lastQuality?.toString() ?? 'Not reviewed',
+            ),
+            const SizedBox(height: 32),
+            Text(
+              'How well did you remember it?',
+              style: theme.textTheme.titleMedium,
+            ),
+            const SizedBox(height: 12),
+            Wrap(
+              spacing: 8,
+              runSpacing: 8,
+              children: [
+                for (final quality in [0, 1, 2, 3, 4, 5])
+                  FilledButton.tonal(
+                    onPressed: () => _review(quality),
+                    child: Text('$quality'),
+                  ),
+              ],
+            ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class _ResultRow extends StatelessWidget {
+  const _ResultRow({required this.label, required this.value});
+
+  final String label;
+  final String value;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(label),
+          Text(value, style: Theme.of(context).textTheme.titleMedium),
+        ],
       ),
     );
   }

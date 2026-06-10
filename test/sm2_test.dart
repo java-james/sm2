@@ -1,17 +1,15 @@
-import 'package:flutter_test/flutter_test.dart';
-import '../lib/SmResponse.dart';
-import '../lib/sm.dart';
+import 'package:spaced_repetition/spaced_repetition.dart';
+import 'package:test/test.dart';
 
 void main() {
   test('Calc success', () {
     final sm = Sm();
 
     SmResponse smResponse = sm.calc(
-      quality: 0,
-      repetitions: 0,
-      previousInterval: 0,
-      previousEaseFactor: 2.5
-    );
+        quality: 0,
+        repetitions: 0,
+        previousInterval: 0,
+        previousEaseFactor: 2.5);
 
     expect(smResponse.interval, 1);
     expect(smResponse.repetitions, 0);
@@ -22,11 +20,10 @@ void main() {
     final sm = Sm();
 
     SmResponse smResponse = sm.calc(
-      quality: 5,
-      repetitions: 2,
-      previousInterval: 6,
-      previousEaseFactor: 1.3
-    );
+        quality: 5,
+        repetitions: 2,
+        previousInterval: 6,
+        previousEaseFactor: 1.3);
 
     expect(smResponse.interval, 8);
     expect(smResponse.repetitions, 3);
