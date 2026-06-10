@@ -130,6 +130,10 @@ easeFactor = previousEaseFactor +
 
 The official SM-2 description also recommends repeating same-day items that score below `4` until they score at least `4`. This package intentionally provides the single-review calculation only; applications should handle review sessions, persistence, and due-date queues around it.
 
+## Correctness
+
+The implementation follows the official SM-2 recurrence and the published Delphi source for SuperMemo 2. In particular, it updates the ease factor after every review, including failed reviews, and rounds fractional intervals up to the nearest whole day.
+
 ## Example App
 
 The `example/` directory contains a small Flutter app that lets you choose quality scores and see how interval, repetitions, and ease factor change over repeated reviews.

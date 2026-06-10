@@ -1,11 +1,27 @@
 import 'sm2_response.dart';
 
-/// Class providing calc function for the SM-2 algorithm.
+/// Calculates SM-2 spaced repetition review intervals.
+///
+/// `Sm2` is stateless. Store the returned [Sm2Response] values with your card
+/// or review item, then pass them back into [calc] on the next review.
 class Sm2 {
+  /// Calculates the next SM-2 state for one reviewed item.
+  ///
+  /// Use `repetitions: 0`, `previousInterval: 0`, and
+  /// `previousEaseFactor: 2.5` for a new item.
+  ///
+  /// Throws [ArgumentError] if the input state is outside the SM-2 domain.
   Sm2Response calc({
+    /// Recall quality from 0 to 5.
     required int quality,
+
+    /// Number of successful repetitions currently stored for the item.
     required int repetitions,
+
+    /// Last scheduled interval in days.
     required int previousInterval,
+
+    /// Last ease factor for the item.
     required double previousEaseFactor,
   }) {
     if (quality < 0 || quality > 5) {

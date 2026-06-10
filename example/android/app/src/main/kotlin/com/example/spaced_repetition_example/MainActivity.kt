@@ -1,4 +1,4 @@
-package br.com.thyagoluciano.sm2.example
+package com.example.spaced_repetition_example
 
 import io.flutter.embedding.android.FlutterActivity
 
